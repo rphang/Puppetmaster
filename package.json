@@ -1,0 +1,20 @@
+{
+  "name": "puppetmaster",
+  "version": "1.0.0",
+  "description": "Puppetmaster is a tool for retrieving and managing the time schedules of students in Master 2 at the University of Lyon 1.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint src --ext .ts",
+    "build-ts": "tsc",
+    "build": "npm run lint && npm run build-ts"
+  },
+  "author": "Roméo PHANG",
+  "license": "ISC",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^6.6.0",
+    "@typescript-eslint/parser": "^6.6.0",
+    "eslint": "^8.48.0",
+    "typescript": "^5.2.2"
+  }
+}
