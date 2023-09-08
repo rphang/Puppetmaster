@@ -1,0 +1,38 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Groups {
+  uid String @unique @id
+  slots Slots[]
+}
+
+model Teachers {
+  name String @unique @id
+  slots Slots[]
+}
+
+model Locations {
+  uid String @unique @id
+  slots Slots[]
+}
+
+model Slots {
+  uid String @unique @id
+  title String
+  group Groups[]
+  teacher Teachers[]
+  start DateTime
+  end DateTime
+  locations Locations[]
+  override Boolean
+}
+
