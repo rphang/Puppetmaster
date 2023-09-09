@@ -6,7 +6,7 @@ const reg_event = /(?:(?:BEGIN:VEVENT\nDTSTAMP:(?:[A-Z0-9]*?)\nDTSTART:([A-Z0-9]
 const reg_date = /([0-9]{4})([0-9]{2})([0-9]{2})T([0-9]{2})([0-9]{2})([0-9]{2})Z/;
 const base_url = "https://adelb.univ-lyon1.fr/jsp/custom/modules/plannings/anonymous_cal.jsp?resources=10069&projectId=3&calType=ical&firstDate=";
 
-function parseGroupAndTeacher(str: string) {
+function parseGroupAndTeacher(str: string) : [string[], string[]] {
     const groups = [];
     const teachers = [];
     
@@ -62,14 +62,15 @@ function fetchEvents(days = 1, TS_Start = new Date()) : Promise<Slot[]> {
                     if (m.index === reg_event.lastIndex) {
                         reg_event.lastIndex++;
                     }
-                    const event: Slot = {} as Slot;
-                    event.uid = m[12];
-                    event.title = m[9];
-                    event.groups = [];
-                    event.locations = [];
-                    event.teachers = [];
-                    event.startDate = new Date();
-                    event.endDate = new Date();
+                    const event: Slot = {
+                        uid: m[12],
+                        title: m[9],
+                        groups: [],
+                        locations: [],
+                        teachers: [],
+                        startDate: new Date(),
+                        endDate: new Date()
+                    };
                     /*
                     Date
                      */

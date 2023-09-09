@@ -1,10 +1,8 @@
-// import { PrismaClient } from '@prisma/client'
+import 'dotenv/config'
 import discordClient from './bot/client'
 
 import { fetch } from './job/worker'
 import { parse } from './utils/slots'
-
-// const prisma = new PrismaClient()
 
 async function main() {
     discordClient.login(process.env.DISCORD_TOKEN);
