@@ -2,7 +2,7 @@
 import * as https from "https";
 import { Slot } from "../types/slot";
 
-const reg_event = /(?:(?:BEGIN:VEVENT\nDTSTAMP:(?:[A-Z0-9]*?)\nDTSTART:([A-Z0-9]*?)\nDTEND:([A-Z0-9]*?)\nSUMMARY: {0,}([a-zéèàA-Z0-9-. , \\/ô]*?)\nLOCATION:([a-zA-Zéèà0-9-. ,\\]*?)\nDESCRIPTION:(?:\\n){0,}((?:(?:LP(?:[ a-zA-Z0-9\\]*?))\\n){1,})((?:(?:[A-Z]*) (?:[A-Z]*)(?: (?:[A-Z]*)){0,}\\n){0,})(?:.*?)\nEND:VEVENT)|(?:BEGIN:VEVENT\nDTSTAMP:(?:[A-Z0-9]*?)\nDTSTART:([A-Z0-9]*?)\nDTEND:([A-Z0-9]*?)\nSUMMARY: {0,}((?:S(?:[A-Z0-9-]*)|M(?:[A-Z0-9-]*)(?:\/M(?:[A-Z0-9-]*)){0,}|Conférence|)[a-zéèàA-Z0-9-. , \\/]*?)\nLOCATION:([a-zA-Zéèà0-9-. ,\\()]*?)\nDESCRIPTION:(?:\\n){0,}(.*?)\nUID:(.*?)\n(?:.*?)END:VEVENT))/gs;
+const reg_event = /(?:(?:BEGIN:VEVENT\nDTSTAMP:(?:[A-Z0-9]*?)\nDTSTART:([A-Z0-9]*?)\nDTEND:([A-Z0-9]*?)\nSUMMARY: {0,}([a-zéèàA-Z0-9-. , \\/ô]*?)\nLOCATION:([a-zA-Zéèà0-9-. ,\\]*?)\nDESCRIPTION:(?:\\n){0,}((?:(?:LP(?:[ a-zA-Z0-9\\]*?))\\n){1,})((?:(?:[A-Z]*) (?:[A-Z]*)(?: (?:[A-Z]*)){0,}\\n){0,})(?:.*?)\nEND:VEVENT)|(?:BEGIN:VEVENT\nDTSTAMP:(?:[A-Z0-9]*?)\nDTSTART:([A-Z0-9]*?)\nDTEND:([A-Z0-9]*?)\nSUMMARY: {0,}((?:(?:[a-zA-Z0-9- ()]*)|M(?:[A-Z0-9-]*)(?:\/M(?:[A-Z0-9-]*)){0,}|Conférence|)[a-zéèàA-Z0-9-. , \\/]*?)\nLOCATION:([a-zA-Zéèà0-9-. ,\\()]*?)\nDESCRIPTION:(?:\\n){0,}(.*?)\nUID:(.*?)\n(?:.*?)END:VEVENT))/gs;
 const reg_date = /([0-9]{4})([0-9]{2})([0-9]{2})T([0-9]{2})([0-9]{2})([0-9]{2})Z/;
 const base_url = "https://adelb.univ-lyon1.fr/jsp/custom/modules/plannings/anonymous_cal.jsp?resources=10069&projectId=3&calType=ical&firstDate=";
 

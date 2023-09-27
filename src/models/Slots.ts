@@ -18,11 +18,10 @@ export async function fetchOveriddenSlots() {
 }
 
 export async function updateSlots(events: Slot[]) {
-    let i = 0;
-    let slots = [];
+    const slots = [];
     for (const event of events) {
         const { uid, ...rest } = event;
-        const slot = await prisma.slots.upsert({
+        await prisma.slots.upsert({
             where: {
                 uid,
                 override: false
@@ -40,7 +39,7 @@ export async function updateSlots(events: Slot[]) {
                 override: false
             }
         });
-        i++;
+        // Teachers & Locations
     }
     return slots;
 }
