@@ -102,9 +102,9 @@ function fetchEvents(days = 1, TS_Start = new Date()) : Promise<Slot[]> {
 }
 
 async function fetch({
-    days = 1,
-    startDate = new Date(2023, 8, 1)
-}) {
+    days,
+    startDate
+} = { days: 365, startDate: new Date(2023, 8, 1) }) {
     const events = await fetchEvents(days, startDate);
     return events;
 }

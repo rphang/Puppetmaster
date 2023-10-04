@@ -40,6 +40,8 @@ function filterBetween(slots: Slot[], startDate: Date, endDate: Date) {
 
 function timeStats(slots: Slot[]) {
   const output = {
+    class: 0,
+    self: 0,
     totalMinutes: 0,
     classMinutes: 0,
     selfMinutes: 0,
@@ -51,8 +53,10 @@ function timeStats(slots: Slot[]) {
     output.totalMinutes += minutes
     if (slot.title.includes('Travaux Personnels')) {
       output.selfMinutes += minutes
+      output.self += 1
     } else {
       output.classMinutes += minutes
+      output.class += 1
     }
   }
   output.missingMinutes -= output.totalMinutes

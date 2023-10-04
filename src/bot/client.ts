@@ -37,12 +37,10 @@ async function init(token) {
 		console.log(`Started refreshing ${commands.length} application (/) commands.`);
 
 		// The put method is used to fully refresh all commands in the guild with the current set
-		const data = await rest.put(
+		await rest.put(
 			Routes.applicationGuildCommands("1150083394894561442", "996455856243752970"),
 			{ body: commands },
 		);
-
-		console.log(`Successfully reloaded ${data} application (/) commands.`);
 	} catch (error) {
 		// And of course, make sure you catch and log any errors!
 		console.error(error);

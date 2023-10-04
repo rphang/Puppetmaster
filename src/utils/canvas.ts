@@ -125,6 +125,12 @@ function generateTabletimeCanvas(
 function generateTabletime(startDate: Date, daysCount: number, Slots: Slot[]) {
     const tabletime = generateTabletimeCanvas(startDate, daysCount);
     const ctx = tabletime.canvas.getContext('2d');
+    if (!ctx) {
+        throw new Error('Could not get canvas context');
+    }
+    if (Slots.length === 0) {
+        return tabletime.canvas.toBuffer();
+    }
     let day = Slots[0].startDate.getDay() - 1;
     for (let i = 0; i < Slots.length; i++) {
         const slot = Slots[i];
