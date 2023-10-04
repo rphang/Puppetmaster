@@ -17,7 +17,7 @@ module.exports = {
         let mainMessage = null;
 
         let thisWeekSlots = await getWeekSlots(defaultWeek);
-        let startWeekDate = new Date().setDate(new Date().getDate() - new Date().getDay() + 1);
+        const startWeekDate = new Date().setDate(new Date().getDate() - new Date().getDay() + 1);
         let attachementEdt = await canvas.generateTabletime(new Date(startWeekDate), 5, thisWeekSlots);
 
         // Embed the buffer in a new attachment
@@ -61,45 +61,7 @@ module.exports = {
                     await i.update({ files: [new AttachmentBuilder(attachementEdt, { name: "edt.png" })], components: [generateButtonRow(defaultWeek)] });
                     break;
                 case 'stats':
-                    // Get stats
-                    const stats = timeStats(thisWeekSlots);
-                    const statsEmbed = {
-                        color: 0x0099ff,
-                        title: 'Statistiques de la semaine',
-                        description: 'Statistiques sur les cours de la semaine',
-                        fields: [
-                            {
-                                name: 'Nombre de cours',
-                                value: stats.class,
-                                inline: true,
-                            },
-                            {
-                                name: 'Nombre de TTPP',
-                                value: stats.self,
-                                inline: true,
-                            },
-                            {
-                                name: 'Temps total',
-                                value: minutesToHours(stats.totalMinutes),
-                                inline: true,
-                            },
-                            {
-                                name: 'Temps classe',
-                                value: minutesToHours(stats.classMinutes),
-                                inline: true,
-                            },
-                            {
-                                name: 'Temps TTPP',
-                                value: minutesToHours(stats.selfMinutes),
-                                inline: true,
-                            },
-                        ],
-                        timestamp: new Date(),
-                        footer: {
-                            text: '© Université Claude Bernard Lyon 1',
-                        },
-                    };
-                    await i.reply({ embeds: [statsEmbed] });
+                    await i.reply({ embeds: [getStatsEmbed(thisWeekSlots)] });
                     // If admin, show class Ids
                     if (i.member.permissions.has('8')) {
                         const classIds = thisWeekSlots.map((slot) => { slot.uid, slot.title });
@@ -110,6 +72,47 @@ module.exports = {
         });
     },
 };
+
+function getStatsEmbed(slots) {
+    const stats = timeStats(slots);
+    const statsEmbed = {
+        color: 0x0099ff,
+        title: 'Statistiques de la semaine',
+        description: 'Statistiques sur les cours de la semaine',
+        fields: [
+            {
+                name: 'Nombre de cours',
+                value: stats.class,
+                inline: true,
+            },
+            {
+                name: 'Nombre de TTPP',
+                value: stats.self,
+                inline: true,
+            },
+            {
+                name: 'Temps total',
+                value: minutesToHours(stats.totalMinutes),
+                inline: true,
+            },
+            {
+                name: 'Temps classe',
+                value: minutesToHours(stats.classMinutes),
+                inline: true,
+            },
+            {
+                name: 'Temps TTPP',
+                value: minutesToHours(stats.selfMinutes),
+                inline: true,
+            },
+        ],
+        timestamp: new Date(),
+        footer: {
+            text: '© Université Claude Bernard Lyon 1',
+        },
+    };
+    return statsEmbed;
+}
 
 function generateButtonRow(week: number = 0) {
     const stats = new ButtonBuilder()
@@ -162,7 +165,7 @@ async function getWeekSlots(week: number = 0): Promise<Slot[]> {
     return thisWeekSlots;
 }
 
-function minutesToHours(minutes: number): String {
+function minutesToHours(minutes: number): string {
     const hours = Math.floor(minutes / 60);
     const minutesLeft = minutes % 60;
     let minutesString = minutesLeft.toString();
