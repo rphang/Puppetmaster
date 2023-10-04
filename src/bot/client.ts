@@ -38,7 +38,7 @@ async function init(token) {
 
 		// The put method is used to fully refresh all commands in the guild with the current set
 		const data = await rest.put(
-			Routes.applicationGuildCommands("1150083394894561442", "1098692564758040637"),
+			Routes.applicationGuildCommands("1150083394894561442", "996455856243752970"),
 			{ body: commands },
 		);
 
