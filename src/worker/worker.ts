@@ -4,7 +4,7 @@ import { Slot } from "../types/slot";
 
 const reg_event = /(?:(?:BEGIN:VEVENT\nDTSTAMP:(?:[A-Z0-9]*?)\nDTSTART:([A-Z0-9]*?)\nDTEND:([A-Z0-9]*?)\nSUMMARY: {0,}([a-zéèàA-Z0-9-. , \\/ô]*?)\nLOCATION:([a-zA-Zéèà0-9-. ,\\]*?)\nDESCRIPTION:(?:\\n){0,}((?:(?:LP(?:[ a-zA-Z0-9\\]*?))\\n){1,})((?:(?:[A-Z]*) (?:[A-Z]*)(?: (?:[A-Z]*)){0,}\\n){0,})(?:.*?)\nEND:VEVENT)|(?:BEGIN:VEVENT\nDTSTAMP:(?:[A-Z0-9]*?)\nDTSTART:([A-Z0-9]*?)\nDTEND:([A-Z0-9]*?)\nSUMMARY: {0,}((?:(?:[a-zA-Z0-9- ()]*)|M(?:[A-Z0-9-]*)(?:\/M(?:[A-Z0-9-]*)){0,}|Conférence|)[a-zéèàA-Z0-9-. , \\/]*?)\nLOCATION:([a-zA-Zéèà0-9-. ,\\()]*?)\nDESCRIPTION:(?:\\n){0,}(.*?)\nUID:(.*?)\n(?:.*?)END:VEVENT))/gs;
 const reg_date = /([0-9]{4})([0-9]{2})([0-9]{2})T([0-9]{2})([0-9]{2})([0-9]{2})Z/;
-const base_url = "https://adelb.univ-lyon1.fr/jsp/custom/modules/plannings/anonymous_cal.jsp?resources=10069&projectId=3&calType=ical&firstDate=";
+const base_url = "https://adelb.univ-lyon1.fr/jsp/custom/modules/plannings/anonymous_cal.jsp?resources=69711,19402&projectId=0&calType=ical&firstDate=";
 
 function parseGroupAndTeacher(str: string) : [string[], string[]] {
     const groups = [];
@@ -104,7 +104,7 @@ function fetchEvents(days = 1, TS_Start = new Date()) : Promise<Slot[]> {
 async function fetch({
     days,
     startDate
-} = { days: 365, startDate: new Date(2023, 8, 1) }) {
+} = { days: 365, startDate: new Date(2024, 8, 1) }) {
     const events = await fetchEvents(days, startDate);
     return events;
 }
