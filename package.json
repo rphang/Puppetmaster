@@ -9,7 +9,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint src --ext .ts --fix",
     "build-ts": "tsc",
-    "build": "npm run lint && npm run build-ts"
+    "build": "npm run lint && npm run build-ts",
+    "migrate": "prisma migrate dev",
+    "generate": "prisma generate"
   },
   "author": "Roméo PHANG",
   "license": "ISC",
